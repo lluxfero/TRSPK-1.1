@@ -16,7 +16,7 @@ s = FirstWorker.ToString();
 Console.WriteLine(s);
 
 
-Console.WriteLine("======StringList======");
+Console.WriteLine("\n======StringList======");
 var FirstStringList = new StringList();
 FirstStringList.Insert("1");
 FirstStringList.Insert("2");    
@@ -46,8 +46,8 @@ Console.ReadLine();
 
 class Man
 {
-    public string? name;
-    public int age;
+    protected string? name;
+    protected int age;
     public Man()
     {
         SetName();
@@ -91,7 +91,7 @@ class Man
 
 class Teenager : Man
 {
-    public string? school;
+    protected string? school;
     public Teenager()
     {
         SetSchool();
@@ -128,7 +128,7 @@ class Teenager : Man
 }
 class Worker : Man
 {
-    public string? work;
+    protected string? work;
     public Worker()
     {
         SetWork();
@@ -167,23 +167,28 @@ class Worker : Man
 class StringList
 {
     public int size;
-    string[] masstr = new string[100];
+    string[] masstr;
+    public StringList()
+    {
+        size = 0;
+        masstr = new string[100];
+    }
     public void Insert(string s) 
     {
-        if (n >= 0 && n < size)
+        if (size < 100)
         {
-            for (int i = n; i < size - 1; i++)
-                masstr[i] = masstr[i + 1];
-            size--;
+            masstr[size] = s;
+            size++;
         }
-        else Console.WriteLine($"Ошибка! Элемента с индексом {n} нет");
+        else Console.WriteLine($"Ошибка! Массив переполнен");
     }
     public void Delete(int n)
     {
         if (n >= 0 && n < size)
         {
-            for (int i = n; i < size - 1; i++)
+            for (int i = n; i < size - 2; i++)
                 masstr[i] = masstr[i + 1];
+            masstr[size - 1] = null;
             size--;
         }
         else Console.WriteLine($"Ошибка! Элемента с индексом {n} нет");
