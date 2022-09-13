@@ -170,8 +170,13 @@ class StringList
     string[] masstr = new string[100];
     public void Insert(string s) 
     {
-        masstr[size] = s;
-        size++;
+        if (n >= 0 && n < size)
+        {
+            for (int i = n; i < size - 1; i++)
+                masstr[i] = masstr[i + 1];
+            size--;
+        }
+        else Console.WriteLine($"Ошибка! Элемента с индексом {n} нет");
     }
     public void Delete(int n)
     {
